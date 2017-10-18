@@ -95,7 +95,7 @@ TVector<ValType>::~TVector()
 template <class ValType> // доступ
 ValType& TVector<ValType>::operator[](int pos)
 {
-	if( (pos<0) || (pos > MAX_VECTOR_SIZE))
+	if( (pos<0) || (pos > MAX_VECTOR_SIZE) || ((pos-StartIndex) > Size))
 		throw pos;
 	return pVector[pos-StartIndex];
 } /*-------------------------------------------------------------------------*/
@@ -262,6 +262,8 @@ TMatrix<ValType>::TMatrix(const TVector<TVector<ValType> > &mt):
 template <class ValType> // сравнение
 bool TMatrix<ValType>::operator==(const TMatrix<ValType> &mt) const
 {
+	if ( &mt == this)
+		return true;
 	if (Size==mt.Size)
 	{
 		for (int i=0; i<Size; i++)
@@ -300,12 +302,16 @@ TMatrix<ValType>& TMatrix<ValType>::operator=(const TMatrix<ValType> &mt)
 template <class ValType> // сложение
 TMatrix<ValType> TMatrix<ValType>::operator+(const TMatrix<ValType> &mt)
 {
+	if ( Size != mt.Size) 
+		throw 50;
 	return TVector<TVector<ValType> >::operator+(mt);
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // вычитание
 TMatrix<ValType> TMatrix<ValType>::operator-(const TMatrix<ValType> &mt)
 {
+	if ( Size != mt.Size) 
+		throw 50;
 	return TVector<TVector<ValType> >::operator-(mt);
 } /*-------------------------------------------------------------------------*/
 

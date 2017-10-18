@@ -6,12 +6,12 @@ TEST(TMatrix, can_create_matrix_with_positive_length)
 {
   ASSERT_NO_THROW(TMatrix<int> m(5));
 }
-/*
+
 TEST(TMatrix, cant_create_too_large_matrix)
 {
   ASSERT_ANY_THROW(TMatrix<int> m(MAX_MATRIX_SIZE + 1));
 }
-*/
+
 TEST(TMatrix, throws_when_create_matrix_with_negative_length)
 {
   ASSERT_ANY_THROW(TMatrix<int> m(-5));
@@ -32,12 +32,17 @@ TEST(TMatrix, copied_matrix_is_equal_to_source_one)
   TMatrix<int> mt2(mt1);
   EXPECT_EQ(mt1,mt2);
 }
-/*
+
 TEST(TMatrix, copied_matrix_has_its_own_memory)
 {
+	const int size1 = 2;
+  TMatrix<int> mt1(size1), mt2(mt1);
+  mt2[0][1] = 50; 
+  EXPECT_EQ(50, mt2[0][1]);
+  EXPECT_EQ(0, mt1[0][1]);
 
 }
-*/
+
 TEST(TMatrix, can_get_size)
 {
   TMatrix<int> mt(4);
@@ -46,7 +51,7 @@ TEST(TMatrix, can_get_size)
 
 TEST(TMatrix, can_set_and_get_element)
 {
-  TMatrix<int> mt(4);
+	TMatrix<int> mt(4);
 	mt[1][1] = 10;
 	EXPECT_EQ(10, mt[1][1]);
 }
@@ -56,13 +61,13 @@ TEST(TMatrix, throws_when_set_element_with_negative_index)
 	TMatrix<int> mt(4);
 	ASSERT_ANY_THROW(mt[-2][3] = 10);
 }
-/*
+
 TEST(TMatrix, throws_when_set_element_with_too_large_index)
 {
 	TMatrix<int> m(4);
-	ASSERT_ANY_THROW(m[MAX_MATRIX_SIZE][3] = 10);
+	ASSERT_ANY_THROW(m[5][3] = 10);
 }
-*/
+
 TEST(TMatrix, can_assign_matrix_to_itself)
 {
   const int size = 2;
@@ -152,14 +157,14 @@ TEST(TMatrix, can_add_matrices_with_equal_size)
     }
   EXPECT_EQ(res, mt1 + mt2);
 }
-/*
+
 TEST(TMatrix, cant_add_matrices_with_not_equal_size)
 {
   const int size1 = 4, size2 = 5;
   TMatrix<int> mt1(size1), mt2(size2);
 	ASSERT_ANY_THROW(mt1 + mt2);
 }
-*/
+
 TEST(TMatrix, can_subtract_matrices_with_equal_size)
 {
   const int size = 4;
@@ -172,10 +177,10 @@ TEST(TMatrix, can_subtract_matrices_with_equal_size)
     }
   EXPECT_EQ(res, mt1 - mt2);
 }
-/*
+
 TEST(TMatrix, cant_subtract_matrixes_with_not_equal_size)
 {
   const int size1 = 4, size2 = 5;
   TMatrix<int> mt1(size1), mt2(size2);
 	ASSERT_ANY_THROW(mt1 - mt2);
-}*/
+}
